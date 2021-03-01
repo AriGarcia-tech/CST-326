@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 249266bd2e1332440a1d7d79a1def706, type: 2}
     - target: {fileID: 7526390807128467902, guid: e38589d7aed4eb441997426a2d3601de, type: 3}
       propertyPath: m_Name
-      value: Cube Variant 1
+      value: QuestionStarter
       objectReference: {fileID: 0}
     - target: {fileID: 7568500115497023928, guid: e38589d7aed4eb441997426a2d3601de, type: 3}
       propertyPath: m_RootOrder
@@ -33,7 +33,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7568500115497023928, guid: e38589d7aed4eb441997426a2d3601de, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7568500115497023928, guid: e38589d7aed4eb441997426a2d3601de, type: 3}
       propertyPath: m_LocalRotation.x
@@ -45,7 +45,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7568500115497023928, guid: e38589d7aed4eb441997426a2d3601de, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7568500115497023928, guid: e38589d7aed4eb441997426a2d3601de, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -57,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7568500115497023928, guid: e38589d7aed4eb441997426a2d3601de, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e38589d7aed4eb441997426a2d3601de, type: 3}
