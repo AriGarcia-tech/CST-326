@@ -1,44 +1,72 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//namespace enemy;
 public class Enemy : MonoBehaviour
 {
-    public int health = 3;
-    public AudioClip explosion;
-    public AudioSource speaker;
+  public Path route;
+  private Waypoint[] myPathThroughLife;
+  public int coinWorth;
+  public float health = 10;
+  public float speed = .25f;
+  private int index = 0;
+  private Vector3 nextWaypoint;
+  private bool stop = false;
 
-    public GameObject impactEffectPrefab;
-    public float speed = .25f;
-    private Transform enemyloc;
-    // Start is called before the first frame update
-    private void Start()
-    { 
-        enemyloc = GetComponent<Transform>();
-    }
-    void Movement()
+    public float rayLength;
+    public LayerMask layermask;
+  void Awake()
+  {
+    myPathThroughLife = route.path;
+    transform.position = myPathThroughLife[index].transform.position;
+    Recalculate();
+  }
+
+  void Update()
+  {
+    if (!stop)
     {
-        transform.Translate(new Vector3(speed, 0, 0));
+      if ((transform.position - myPathThroughLife[index + 1].transform.position).magnitude < .1f)
+      {
+        index = index + 1;
+        Recalculate();
+      }
 
+
+      Vector3 moveThisFrame = nextWaypoint * Time.deltaTime * speed;
+      transform.Translate(moveThisFrame);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Debug.Log("Ouch!");
-
-        GameObject effectInstance = Instantiate(impactEffectPrefab);
-
-        Destroy(effectInstance,2f);
-
-        Destroy(collision.gameObject);
-
-        health--;
-        if(health <= 0)
+    /*if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if(Physics.Raycast(ray,out hit, rayLength, layermask))
+            {
+                health--;
+            }
+        }
+    if(health <= 0)
         {
             Destroy(gameObject);
-            speaker.PlayOneShot(explosion);
-            ScoreManager.playerScore += 10;
+            Purse.coinWorth +=100;
         }
+    */
+
+  }
+
+  void Recalculate()
+  {
+    if (index < myPathThroughLife.Length -1)
+    {
+      nextWaypoint = (myPathThroughLife[index + 1].transform.position - myPathThroughLife[index].transform.position).normalized;
 
     }
+    else
+    {
+      stop = true;
+    }
+  }
 }
