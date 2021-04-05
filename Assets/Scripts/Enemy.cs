@@ -1,24 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
 
-
-//namespace enemy;
 public class Enemy : MonoBehaviour
 {
   public Path route;
   private Waypoint[] myPathThroughLife;
   public int coinWorth;
-  public float health = 10;
+  public float health = 100;
   public float speed = .25f;
   private int index = 0;
   private Vector3 nextWaypoint;
   private bool stop = false;
+  private float healthPerUnit;
 
-    public float rayLength;
-    public LayerMask layermask;
-  void Awake()
+  public Transform healthBar;
+
+  void Start()
   {
+    healthPerUnit = 100f / health;
+
     myPathThroughLife = route.path;
     transform.position = myPathThroughLife[index].transform.position;
     Recalculate();
@@ -39,22 +41,6 @@ public class Enemy : MonoBehaviour
       transform.Translate(moveThisFrame);
     }
 
-    /*if (Input.GetMouseButtonDown(0))
-        {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray,out hit, rayLength, layermask))
-            {
-                health--;
-            }
-        }
-    if(health <= 0)
-        {
-            Destroy(gameObject);
-            Purse.coinWorth +=100;
-        }
-    */
-
   }
 
   void Recalculate()
@@ -69,4 +55,21 @@ public class Enemy : MonoBehaviour
       stop = true;
     }
   }
+
+  public void Damage()
+  {
+    health -= 20;
+    if (health <= 0)
+    {
+      
+      
+      Debug.Log($"{transform.name} is Dead");
+      Destroy(this.gameObject);
+    }
+
+    float percentage = healthPerUnit * health;
+    Vector3 newHealthAmount = new Vector3(percentage/100f , healthBar.localScale.y, healthBar.localScale.z);
+    healthBar.localScale = newHealthAmount;
+  }
+
 }
