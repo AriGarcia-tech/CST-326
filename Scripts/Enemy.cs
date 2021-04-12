@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,13 +11,15 @@ public class Enemy : MonoBehaviour
   public int coinWorth;
   public float health = 100;
   public float speed = .25f;
+    public GameObject impactEffectPrefab;
   private int index = 0;
   private Vector3 nextWaypoint;
   private bool stop = false;
   private float healthPerUnit;
-
+    
   public Transform healthBar;
 
+    public UnityEvent DeathEvent;
   void Start()
   {
     healthPerUnit = 100f / health;
@@ -56,15 +59,22 @@ public class Enemy : MonoBehaviour
     }
   }
 
-  public void Damage()
+
+    public void Damage()
+    {
+        Damage(20);
+    }
+  public void Damage(float hitAmount)
   {
-    health -= 20;
+    health -= hitAmount;
     if (health <= 0)
     {
       
       
       Debug.Log($"{transform.name} is Dead");
+      DeathEvent.Invoke();
       Destroy(this.gameObject);
+            GameObject effectInstance = Instantiate(impactEffectPrefab, transform.position, Quaternion.identity);
     }
 
     float percentage = healthPerUnit * health;

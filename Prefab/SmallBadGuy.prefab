@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 8920765068839325907}
   - component: {fileID: 5988872162163278226}
   - component: {fileID: 7966462154022137238}
+  - component: {fileID: -7519602034233491113}
   m_Layer: 0
   m_Name: SmallBadGuy
   m_TagString: Untagged
@@ -335,6 +336,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   route: {fileID: 0}
   coinWorth: 0
-  health: 0
+  health: 40
   speed: 0.5
+  impactEffectPrefab: {fileID: 692775840101127414, guid: b81170d5487edeb40ab1618493df837b, type: 3}
   healthBar: {fileID: 7297149394353130915}
+  DeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!54 &-7519602034233491113
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8830470595690722518}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
